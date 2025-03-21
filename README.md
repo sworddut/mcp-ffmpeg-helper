@@ -94,7 +94,7 @@ macos:
 
 ### 添加水印
 直接在windsurf控制台输入：
-请帮我为"path/to/input.mp4"添加水印到"path/to/output.mp4"
+请帮我为"path/to/input.mp4"添加水印到"path/to/output.mp4"，使用"path/to/watermark.png"作为水印，位置在[右下角/左上角/中心等]，透明度[0-1之间的值]
 
 ## 可用工具
 

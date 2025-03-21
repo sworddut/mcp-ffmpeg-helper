@@ -389,21 +389,22 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             overlayPosition = "10:10";
             break;
           case "topright":
-            overlayPosition = "main_w-overlay_w-10:10";
+            overlayPosition = "W-w-10:10";
             break;
           case "bottomleft":
-            overlayPosition = "10:main_h-overlay_h-10";
+            overlayPosition = "10:H-h-10";
             break;
           case "center":
-            overlayPosition = "(main_w-overlay_w)/2:(main_h-overlay_h)/2";
+            overlayPosition = "(W-w)/2:(H-h)/2";
             break;
           case "bottomright":
           default:
-            overlayPosition = "main_w-overlay_w-10:main_h-overlay_h-10";
+            overlayPosition = "W-w-10:H-h-10";
             break;
         }
         
-        const command = `-i "${inputPath}" -i "${watermarkPath}" -filter_complex "[1:v]format=rgba,colorchannelmixer=aa=${opacity}[watermark];[0:v][watermark]overlay=${overlayPosition}" "${outputPath}" -y`;
+        // Improved command with better handling of watermark opacity and format
+        const command = `-i "${inputPath}" -i "${watermarkPath}" -filter_complex "[1:v]format=rgba,colorchannelmixer=aa=${opacity}[watermark];[0:v][watermark]overlay=${overlayPosition}:format=auto,format=yuv420p" -codec:a copy "${outputPath}" -y`;
         const result = await runFFmpegCommand(command);
         
         return {
