@@ -1,8 +1,7 @@
 {
-  "name": "mcp-ffmpeg-helper",
+  "name": "@sworddut/mcp-ffmpeg-helper",
   "version": "0.1.0",
-  "description": "A mcp ffmpeg helper",
-  "private": true,
+  "description": "A Model Context Protocol (MCP) helper for FFmpeg video processing operations",
   "type": "module",
   "bin": {
     "mcp-ffmpeg-helper": "./build/index.js"
@@ -23,5 +22,28 @@
   "devDependencies": {
     "@types/node": "^20.11.24",
     "typescript": "^5.3.3"
+  },
+  "keywords": [
+    "ffmpeg",
+    "video",
+    "mcp",
+    "model-context-protocol",
+    "video-processing",
+    "watermark",
+    "trim",
+    "convert"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/mcp-ffmpeg-helper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/mcp-ffmpeg-helper/issues"
+  },
+  "homepage": "https://github.com/yourusername/mcp-ffmpeg-helper#readme",
+  "engines": {
+    "node": ">=14.0.0"
   }
 }

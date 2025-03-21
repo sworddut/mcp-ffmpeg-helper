@@ -41,6 +41,7 @@ MCP FFmpeg Helper 是一个轻量级服务器，它通过 MCP 协议将 FFmpeg �
 ### 配置 MCP
 
 要在 Windsurf 或其他支持 MCP 的应用程序中使用此工具，请将以下配置添加到 MCP 配置文件中：
+1.本地配置node服务器
 
 windows:
 ```json
@@ -65,6 +66,34 @@ macos:
     "command": "node",
     "args": [
       "路径/到/mcp-ffmpeg-helper/build/index.js"
+    ]
+  }
+}
+```
+
+2.使用npm包的方式配置mcp服务器
+
+windows:
+```json
+{
+  "mcp-ffmpeg-helper": {
+    "command": "cmd",
+    "args": [
+      "/c",
+      "npx",
+      "@sworddut/mcp-ffmpeg-helper"
+    ]
+  }
+}
+```
+
+macos:
+```json
+{
+  "mcp-ffmpeg-helper": {
+    "command": "npx",
+    "args": [
+      "@sworddut/mcp-ffmpeg-helper"
     ]
   }
 }
