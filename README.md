@@ -4,6 +4,10 @@
 
 一个基于 Model Context Protocol (MCP) 的 FFmpeg 辅助工具，提供视频处理功能。
 
+<a href="https://glama.ai/mcp/servers/@sworddut/mcp-ffmpeg-helper">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@sworddut/mcp-ffmpeg-helper/badge" alt="FFmpeg Helper MCP server" />
+</a>
+
 ## 功能概述
 
 MCP FFmpeg Helper 是一个轻量级服务器，它通过 MCP 协议将 FFmpeg 的强大功能暴露给 AI 助手。它支持以下视频处理操作：
