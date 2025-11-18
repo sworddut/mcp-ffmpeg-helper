@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/sworddut-mcp-ffmpeg-helper-badge.png)](https://mseep.ai/app/sworddut-mcp-ffmpeg-helper)
+
 # MCP FFmpeg Helper
 
 一个基于 Model Context Protocol (MCP) 的 FFmpeg 辅助工具，提供视频处理功能。
