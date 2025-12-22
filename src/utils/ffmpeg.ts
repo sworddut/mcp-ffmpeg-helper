@@ -1,17 +1,50 @@
-import { exec } from "child_process";
-import { promisify } from "util";
+import { spawn } from "child_process";
 import { validatePath } from "./file.js";
 
-const execPromise = promisify(exec);
+function runProcess(
+  command: string,
+  args: string[],
+  useShell = false
+): Promise<{ stdout: string; stderr: string; code: number }> {
+  return new Promise((resolve, reject) => {
+    const child = spawn(command, args, {
+      shell: useShell,
+      windowsHide: true,
+    });
+    let stdout = "";
+    let stderr = "";
+
+    child.stdout?.on("data", (chunk) => {
+      stdout += chunk.toString();
+    });
+    child.stderr?.on("data", (chunk) => {
+      stderr += chunk.toString();
+    });
+    child.on("error", reject);
+    child.on("close", (code) => {
+      resolve({ stdout, stderr, code: code ?? 0 });
+    });
+  });
+}
 
 /**
  * Helper function to run FFmpeg commands with better error handling
  */
 export async function runFFmpegCommand(command: string): Promise<string> {
   try {
-    console.log(`Running FFmpeg command: ffmpeg ${command}`);
-    const { stdout, stderr } = await execPromise(`ffmpeg ${command}`);
-    return stdout || stderr;
+    console.error(`Running FFmpeg command: ffmpeg ${command}`);
+    const { stdout, stderr, code } = await runProcess(
+      `ffmpeg ${command}`,
+      [],
+      true
+    );
+    if (code === 0) {
+      return stdout || stderr;
+    }
+    if (stderr) {
+      return stderr;
+    }
+    throw new Error(`FFmpeg exited with code ${code}`);
   } catch (error: any) {
     console.error("FFmpeg error:", error.message);
     if (error.stderr) {
@@ -27,9 +60,23 @@ export async function runFFmpegCommand(command: string): Promise<string> {
 export async function getVideoInfo(filePath: string): Promise<string> {
   try {
     validatePath(filePath, true);
-    console.log(`Getting video info for: ${filePath}`);
-    const { stdout, stderr } = await execPromise(`ffprobe -v error -show_format -show_streams -print_format json "${filePath}"`);
-    return stdout || stderr;
+    console.error(`Getting video info for: ${filePath}`);
+    const { stdout, stderr, code } = await runProcess("ffprobe", [
+      "-v",
+      "error",
+      "-show_format",
+      "-show_streams",
+      "-print_format",
+      "json",
+      filePath,
+    ]);
+    if (code === 0) {
+      return stdout || stderr;
+    }
+    if (stderr) {
+      return stderr;
+    }
+    throw new Error(`FFprobe exited with code ${code}`);
   } catch (error: any) {
     console.error("FFprobe error:", error.message);
     if (error.stderr) {

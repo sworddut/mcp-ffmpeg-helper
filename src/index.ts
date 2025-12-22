@@ -72,10 +72,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
  * This allows the server to communicate via standard input/output streams.
  */
 async function main() {
-  console.log("Starting MCP FFmpeg Helper server...");
+  console.error("Starting MCP FFmpeg Helper server...");
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.log("MCP FFmpeg Helper server connected and ready");
+  console.error("MCP FFmpeg Helper server connected and ready");
 }
 
 main().catch((error) => {
