@@ -1,6 +1,6 @@
 {
   "name": "@sworddut/mcp-ffmpeg-helper",
-  "version": "0.1.1",
+  "version": "0.2.1",
   "description": "A Model Context Protocol (MCP) helper for FFmpeg video processing operations",
   "type": "module",
   "bin": {
